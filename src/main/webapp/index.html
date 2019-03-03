@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>http长连接demo</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js" ></script>
+    <script type="text/javascript"  >
+        var isRunning = false;
+        $(document).ready(function () {
+
+              f();
+            document.writeln("已经启动了");
+            var timename=setInterval("f();",10000);
+
+        });
+
+
+
+        function f() {
+            if(!isRunning){
+                //请求参数信息
+                isRunning = true;
+                $.post("http://localhost:8080/http/servlet1",
+                    {
+                        name: "Donald Duck",
+                        city: "Duckburg"
+                    },
+                    function (data, status) {
+                        document.writeln(data);
+                        isRunning = false;
+                    });
+                //参数变化，变更界面上的参数值
+                //继续请求参数信息
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+
+<label>获取新的配置信息 </label>
+
+</body>
+</html>
